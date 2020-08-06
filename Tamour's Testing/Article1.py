@@ -1,17 +1,9 @@
 import collections
 import nest_asyncio
-nest_asyncio.apply()
-
-
 import numpy as np
 import tensorflow as tf
 import tensorflow_federated as tff
-
-emnist_train, emnist_test = tff.simulation.datasets.emnist.load_data()
-
-np.random.seed(0)
-
-print(tff.federated_computation(lambda: 'Hello World')())
+nest_asyncio.apply()
 
 emnist_train, emnist_test = tff.simulation.datasets.emnist.load_data()
 
@@ -73,6 +65,7 @@ def create_keras_model():
       tf.keras.layers.Softmax(),
   ])
 #Creating the neural network
+
 def model_fn():
   # We _must_ create a new model here, and _not_ capture it from an external
   # scope. TFF will call this within different graph contexts.
@@ -90,6 +83,7 @@ iterative_process = tff.learning.build_federated_averaging_process(
 
 #print(str(iterative_process.initialize.type_signature))
 state = iterative_process.initialize()
+
 NUM_ROUNDS = 11
 for round_num in range(1, NUM_ROUNDS):
     state, metrics = iterative_process.next(state, federated_train_data)
@@ -100,10 +94,10 @@ summary_writer = tf.summary.create_file_writer(logdir)
 state = iterative_process.initialize()
 
 with summary_writer.as_default():
-  for round_num in range(1, NUM_ROUNDS):
-    state, metrics = iterative_process.next(state, federated_train_data)
-    for name, value in metrics.train._asdict().items():
-      tf.summary.scalar(name, value, step=round_num)
+    for round_num in range(1, NUM_ROUNDS):
+        state, metrics = iterative_process.next(state, federated_train_data)
+        for name, value in metrics.train._asdict().items():
+            tf.summary.scalar(name, value, step=round_num)
 
 
 
