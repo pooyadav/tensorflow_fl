@@ -56,8 +56,8 @@ results = model.evaluate(test_data, test_labels)
 print(results)
 
 model.save("model.h5")
-
 """
+
 model = keras.models.load_model("model.h5")
 
 def review_encode(s):
@@ -73,7 +73,7 @@ def review_encode(s):
 	return encoded
 
 
-with open("../tutorials/test.txt", encoding="utf-8") as f:
+with open("test.txt", encoding="utf-8") as f:
 	for line in f.readlines():
 		nline = line.replace(",", "").replace(".", "").replace("(", "").replace(")", "").replace(":", "").replace("\"","").strip().split(" ")
 		encode = review_encode(nline)

@@ -1,3 +1,0 @@
-txt = ("YOUR LACK OF COMMITMENT IS AN INSULT TO PEOPLE WHO BELIEVE IN YOU")
-txt = txt.lower()
-print(txt)
