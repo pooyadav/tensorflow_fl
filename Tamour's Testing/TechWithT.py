@@ -60,3 +60,4 @@ pyplot.xlabel(p)
 pyplot.ylabel("Final Grade")
 pyplot.show()
 
+print(X)
