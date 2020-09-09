@@ -4,5 +4,5 @@ python3  -u main.py --dataset=$1 --optimizer='fedprox'  \
             --eval_every=1 --batch_size=10 \
             --num_epochs=20 \
             --drop_percent=$2 \
-            --model='mclr' \
+            --model='stacked_lstm' \
             --mu=$3
